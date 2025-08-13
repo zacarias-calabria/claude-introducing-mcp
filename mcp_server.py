@@ -1,4 +1,4 @@
-from Pydantic import Field
+from pydantic import Field
 from mcp.server.fastmcp import FastMCP
 
 mcp = FastMCP("DocumentMCP", log_level="ERROR")
