@@ -15,7 +15,7 @@ docs = {
 
 @mcp.tool(
     name="read_document",
-    desciption="Read the contents of a document and return it as a string."
+    description="Read the contents of a document and return it as a string."
 )
 def read_document(
     doc_id: str = Field(description="Id of the document to read")
