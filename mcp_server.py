@@ -13,6 +13,19 @@ docs = {
     "spec.txt": "These specifications define the technical requirements for the equipment.",
 }
 
+
+def _validate_document_exists(doc_id: str) -> None:
+    """Validate that a document ID exists in the docs dictionary.
+    
+    Args:
+        doc_id: The document ID to validate
+        
+    Raises:
+        ValueError: If the document ID is not found
+    """
+    if doc_id not in docs:
+        raise ValueError(f"Doc with id {doc_id} not found")
+
 @mcp.tool(
     name="read_document",
     description="Read the contents of a document and return it as a string."
@@ -20,9 +33,7 @@ docs = {
 def read_document(
     doc_id: str = Field(description="Id of the document to read")
 ):
-    if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} nor found")
-
+    _validate_document_exists(doc_id)
     return docs[doc_id]
 
 @mcp.tool(
@@ -34,9 +45,7 @@ def edit_document(
     old_str: str = Field(description="The text to replace. Must match exactly, including whitespace."),
     new_str: str = Field(description="The new text to insert in place of the old text.")
 ):
-    if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} nor found")
-
+    _validate_document_exists(doc_id)
     docs[doc_id] = docs[doc_id].replace(old_str, new_str)
 
 @mcp.resource(
@@ -57,8 +66,7 @@ def list_documents() -> list[str]:
 
 )
 def fetch_document(doc_id: str) -> str:
-    if doc_id not in docs:
-        raise ValueError(f"Doc with id {doc_id} nor found")
+    _validate_document_exists(doc_id)
     return docs[doc_id]
 
 # TODO: Write a prompt to rewrite a doc in markdown format
