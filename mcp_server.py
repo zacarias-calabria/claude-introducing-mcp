@@ -46,6 +46,8 @@ def edit_document(
     new_str: str = Field(description="The new text to insert in place of the old text.")
 ):
     _validate_document_exists(doc_id)
+    if docs[doc_id].find(old_str) < 0:
+        raise ValueError(f"The string \"{old_str}\" is not found in the {doc_id} document")
     docs[doc_id] = docs[doc_id].replace(old_str, new_str)
 
 @mcp.resource(
