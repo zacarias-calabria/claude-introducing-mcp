@@ -68,8 +68,7 @@ def list_documents() -> list[str]:
 
 )
 def fetch_document(doc_id: str) -> str:
-    _validate_document_exists(doc_id)
-    return docs[doc_id]
+    return read_document(doc_id)
 
 # TODO: Write a prompt to rewrite a doc in markdown format
 # TODO: Write a prompt to summarize a doc
