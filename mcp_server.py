@@ -54,7 +54,7 @@ def edit_document(
         name="list_documents",
         description="A resource to return all doc id's",
         uri="docs://documents",
-        mime_type="appplication/json"
+        mime_type="application/json"
 
 )
 def list_documents() -> list[str]:
